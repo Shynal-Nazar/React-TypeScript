@@ -4,7 +4,7 @@ import ContactListItem from "./ContactListItem";
 
 const ContactList: React.FC = () => {
   const contacts = useAppSelector((state) => state.contacts.contacts);
-  const filter = useAppSelector((state) => state.contacts.filter);
+  const filter = useAppSelector((state) => state.filter.filter);
   const dispatch = useAppDispatch();
 
   const getFilteredContacts = () => {

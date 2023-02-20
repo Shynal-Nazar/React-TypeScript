@@ -1,5 +1,6 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import { ContactSplice } from "./contactsSplice";
+import { FilterSplice } from "./filterSplice";
 import {
   persistStore,
   persistReducer,
@@ -19,6 +20,7 @@ const persistConfig = {
 
 const rootReducer = combineReducers({
   contacts: ContactSplice.reducer,
+  filter: FilterSplice.reducer,
 });
 
 const persistedReducer = persistReducer(persistConfig, rootReducer);

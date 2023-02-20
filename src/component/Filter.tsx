@@ -1,8 +1,8 @@
 import { useAppDispatch, useAppSelector } from "../store/hook";
-import { handleChangeFilter } from "../store/contactsSplice";
+import { handleChangeFilter } from "../store/filterSplice";
 
 const Filter: React.FC = () => {
-  const value = useAppSelector((state) => state.contacts.filter);
+  const value = useAppSelector((state) => state.filter.filter);
   const dispatch = useAppDispatch();
   return (
     <input

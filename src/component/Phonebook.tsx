@@ -1,9 +1,10 @@
 import { useState } from "react";
 import { addContact } from "../store/contactsSplice";
-
-import { useAppDispatch } from "../store/hook";
+import { nanoid } from "nanoid";
+import { useAppDispatch, useAppSelector } from "../store/hook";
 
 const PhonebookComponent: React.FunctionComponent = () => {
+  const contacts = useAppSelector((state) => state.contacts.contacts);
   const [nameInput, setNameInput] = useState("");
   const [numberInput, setNumberInput] = useState("");
   const dispatch = useAppDispatch();
@@ -26,10 +27,21 @@ const PhonebookComponent: React.FunctionComponent = () => {
   const onSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
     if (nameInput && numberInput) {
-      dispatch(addContact({ nameInput, numberInput }));
+      const contactInState = contacts.some(
+        (item) => item.name.toLowerCase() === nameInput.toLowerCase()
+      );
+      if (contactInState) {
+        alert(`${nameInput} is already in contacts!`);
+        return;
+      }
+      const newContact = {
+        id: nanoid(),
+        name: nameInput,
+        number: numberInput,
+      };
+      dispatch(addContact(newContact));
       setNameInput("");
       setNumberInput("");
-      console.log(`submit`);
     }
   };
 
